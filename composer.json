@@ -1,0 +1,24 @@
+{
+  "name": "ghbjayce/weapon",
+  "description": "There's always the PHP weapon you want.",
+  "require-dev": {
+    "symfony/var-dumper": "^4.2",
+    "phpunit/phpunit": "^7.5"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "GHBJayce",
+      "email": "jaycedeng@outlook.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
+    "psr-4": {
+      "GHBJayce\\Weapon\\": "src/"
+    }
+  }
+}
