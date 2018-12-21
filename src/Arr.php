@@ -1,6 +1,6 @@
 <?php
 
-namespace GHBJayce\Weapon;
+namespace GHBJayce\Weapons;
 
 class Arr
 {
@@ -39,8 +39,25 @@ class Arr
     {
         $return = [];
 
-        foreach ($array as $v) {
-            isset($v[$key]) && $return[] = $v[$key];
+        foreach ($array as $item) {
+            isset($item[$key]) && $return[] = $item[$key];
+        }
+
+        return $return;
+    }
+
+    /**
+     * 转换成数组
+     *
+     * @param object $object
+     * @return array
+     */
+    public static function toArray($object)
+    {
+        $return = [];
+
+        foreach ($object as $key => $item) {
+            $return[$key] = $item;
         }
 
         return $return;

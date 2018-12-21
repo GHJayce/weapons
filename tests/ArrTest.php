@@ -2,7 +2,6 @@
 
 namespace tests;
 
-use GHBJayce\Weapon\Arr;
 use PHPUnit\Framework\TestCase;
 
 class ArrTest extends TestCase
@@ -31,7 +30,7 @@ class ArrTest extends TestCase
                     'price' => 12,
                 ],
             ],
-        ], Arr::group([
+        ], array_group([
             [
                 'name' => 'apple',
                 'price' => 19,

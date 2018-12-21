@@ -1,7 +1,7 @@
 <?php
 
-use GHBJayce\Weapon\Arr;
-use GHBJayce\Weapon\Dates;
+use GHBJayce\Weapons\Arr;
+use GHBJayce\Weapons\Dates;
 
 if (!function_exists('array_group')) {
     function array_group(array $array, $key_or_func)
@@ -14,6 +14,13 @@ if (!function_exists('array_one_dimension')) {
     function array_one_dimension(array $array, $key)
     {
         return Arr::toOneDimension($array, $key);
+    }
+}
+
+if (!function_exists('to_array')) {
+    function to_array($array)
+    {
+        return Arr::toArray($array);
     }
 }
 
@@ -45,10 +52,17 @@ if (!function_exists('is_tomorrow')) {
     }
 }
 
-if (!function_exists('date_format')) {
-    function date_format($timestamp = null)
+if (!function_exists('to_date_format')) {
+    function to_date_format($timestamp = null)
     {
-        return Dates::toDate($timestamp = null);
+        return Dates::toDateFormat($timestamp);
+    }
+}
+
+if (!function_exists('date_common_format')) {
+    function date_common_format($timestamp = null)
+    {
+        return Dates::toCommonFormat($timestamp);
     }
 }
 

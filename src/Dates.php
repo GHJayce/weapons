@@ -1,6 +1,6 @@
 <?php
 
-namespace GHBJayce\Weapon;
+namespace GHBJayce\Weapons;
 
 /**
  * Class Dates
@@ -32,24 +32,17 @@ class Dates
      *
      * @param int|string $previous_time
      * @param null|int|string $latest_time 默认：当前时间
-     * @return array
+     * @return bool|\DateInterval
      */
     public static function duration($previous_time, $latest_time = null)
     {
-        $previous_time = self::toStamp($previous_time);
+        $previous_time = new \DateTime(self::toCommonFormat($previous_time));
 
-        $latest_time = !empty($latest_time) ? self::toStamp($latest_time) : time();
+        $latest_time = new \DateTime(self::toCommonFormat($latest_time));
 
-        $duration = abs($latest_time - $previous_time);
+        $duration = $previous_time->diff($latest_time);
 
-        return array_filter([
-            'year' => $year = floor($duration / self::YEAR),
-            'month' => $month = floor($duration / self::MONTH % 12),
-            'day_total' => floor($duration / self::DAY),//floor($duration / self::DAY) - $year * 366 - $month * 30,
-            'hour' => floor($duration / self::HOUR % 24),
-            'minute' => floor($duration / self::MINUTE % 60),
-            'second' => floor($duration % 60),
-        ]);
+        return $duration;
     }
 
     /**
@@ -60,7 +53,7 @@ class Dates
      */
     public static function isToday($datetime)
     {
-        return self::toDate(self::toStamp($datetime)) === self::toDate();
+        return self::toDateFormat(self::toStamp($datetime)) === self::toDateFormat();
     }
 
     /**
@@ -71,7 +64,7 @@ class Dates
      */
     public static function isYesterday($datetime)
     {
-        return self::toDate(self::toStamp($datetime)) === self::toDate(strtotime('yesterday', $datetime));
+        return self::toDateFormat(self::toStamp($datetime)) === self::toDateFormat(strtotime('yesterday', $datetime));
     }
 
     /**
@@ -82,7 +75,7 @@ class Dates
      */
     public static function isTomorrow($datetime)
     {
-        return self::toDate(self::toStamp($datetime)) === self::toDate(strtotime('tomorrow', $datetime));
+        return self::toDateFormat(self::toStamp($datetime)) === self::toDateFormat(strtotime('tomorrow', $datetime));
     }
 
     /**
@@ -97,14 +90,25 @@ class Dates
     }
 
     /**
-     * 转换成日期
+     * 转换成日期格式
      *
      * @param int|null $timestamp 默认：当前时间
      * @return false|string
      */
-    public static function toDate($timestamp = null)
+    public static function toDateFormat($timestamp = null)
     {
         return date('Y-m-d', $timestamp ?: time());
+    }
+
+    /**
+     * 转换成常见的日期格式
+     *
+     * @param null $datetime 默认：当前时间
+     * @return false|string
+     */
+    public static function toCommonFormat($datetime = null)
+    {
+        return empty($datetime) ? date('Y-m-d H:i:s', $datetime) : is_string($datetime) ? $datetime : date('Y-m-d H:i:s', $datetime);
     }
 
     /**

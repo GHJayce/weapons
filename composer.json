@@ -1,6 +1,6 @@
 {
-  "name": "ghbjayce/weapon",
-  "description": "There's always the PHP weapon you want.",
+  "name": "ghbjayce/weapons",
+  "description": "There's always the PHP weapons you want.",
   "require-dev": {
     "symfony/var-dumper": "^4.2",
     "phpunit/phpunit": "^7.5"
@@ -18,7 +18,7 @@
       "src/helpers.php"
     ],
     "psr-4": {
-      "GHBJayce\\Weapon\\": "src/"
+      "GHBJayce\\Weapons\\": "src/"
     }
   }
 }
