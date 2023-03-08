@@ -58,4 +58,32 @@ class Random
         }
         return compact('number', 'range');
     }
+
+    public static function unique(int $minimum, int $maximum, int $getQuantity, array $range = []): array
+    {
+        $res = [];
+        while ($getQuantity > 0) {
+            $min = $minimum;
+            $max = $maximum - 1;
+            if ($range) {
+                $index = array_rand($range);
+                $item = $range[$index];
+                unset($range[$index]);
+                if (!isset($item[1])) {
+                    $getQuantity--;
+                    $res[] = $item;
+                    continue;
+                }
+                list($min, $max) = $item;
+            }
+            $output = self::splitRange($min, $max);
+            $res[] = $output['number'];
+            $getQuantity--;
+            if ($output['range']) {
+                array_push($range, ...$output['range']);
+            }
+        }
+        $range = array_values($range);
+        return compact('range', 'res');
+    }
 }

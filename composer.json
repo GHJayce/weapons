@@ -1,4 +1,5 @@
 {
+  "version": "0.0.3",
   "name": "ghbjayce/weapons",
   "description": "There's always the PHP weapons you want.",
   "require-dev": {
